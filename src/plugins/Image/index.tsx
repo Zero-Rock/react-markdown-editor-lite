@@ -42,7 +42,7 @@ export default class Image extends PluginComponent<State> {
   private onImageChanged(file: File) {
     const { onImageUpload } = this.editorConfig;
     if (onImageUpload) {
-      const placeholder = getUploadPlaceholder(file, onImageUpload);
+      const placeholder = getUploadPlaceholder(file, onImageUpload, [{ kind: 'file', type: 'image', content: file }]);
       this.editor.insertPlaceholder(placeholder.placeholder, placeholder.uploaded);
     }
   }
