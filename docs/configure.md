@@ -25,7 +25,7 @@
 | config.syncScrollMode | Scroll sync mode between editor and preview | Array | `['rightFollowLeft', 'leftFollowRight']` | |
 | config.imageAccept | Accepted file extensions for images, list of comma seperated values i.e `.jpg,.png` | String | `''` | |
 | onChange | Callback called on editor change | Function | `({html, text}, event) => {}` |  |
-| onImageUpload | Called on image upload, return a Promise that resolved with image url | `(file: File) => Promise<string>;` | undefined |  |
+| onImageUpload | Called on image upload, return a Promise that resolved with image url or a Function | `(file: File) => Promise<string | Function>;` | undefined |  |
 | onCustomImageUpload | custom image upload here, needs return Promise | `() => Promise` | See detail in src/editor/index.jsx |  |
 
 ## renderHTML
@@ -68,6 +68,8 @@ function onImageUpload(file) {
     const reader = new FileReader();
     reader.onload = data => {
       resolve(data.target.result);
+      // or adjust pre insert imageText by paste object array: items
+      // resolve((imageText, items) => imageText);
     };
     reader.readAsDataURL(file);
   });

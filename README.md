@@ -8,6 +8,10 @@ react-markdown-editor-lite
 
 [中文说明](README_CN.md)
 
+## Differences with origin
+* change onImageUpload return, you can adjust image text before insert
+* remove text in paste items, prevent Chrome paste file name
+
 * A light-weight(20KB zipped) Markdown editor of React component
 * Supports TypeScript
 * Supports custom markdown parser

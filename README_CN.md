@@ -8,6 +8,10 @@ react-markdown-editor-lite
 
 [English Docs](README.md)
 
+## 和原版区别
+* 调整了onImageUpload方法返回，可以传Function来调整待插入的图片链接
+* 粘贴图片时默认移除了文字，避免在Chrome下会粘贴多余的文件名
+
 * A light-weight(20KB zipped) Markdown editor of React component
 * Supports TypeScript
 * Supports custom markdown parser
