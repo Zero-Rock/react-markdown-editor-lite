@@ -25,7 +25,7 @@
 | config.syncScrollMode | Scroll sync mode between editor and preview | Array | `['rightFollowLeft', 'leftFollowRight']` | |
 | config.imageAccept | Accepted file extensions for images, list of comma seperated values i.e `.jpg,.png` | String | `''` | |
 | onChange | Callback called on editor change | Function | `({html, text}, event) => {}` |  |
-| onImageUpload | Called on image upload, return a Promise that resolved with image url or a Function | `(file: File) => Promise<string | Function>;` | undefined |  |
+| onImageUpload | Called on image upload, return a Promise that resolved with pre insert image text | `(file: File, imageText: string, itemsInfo: itemInfo[]) => Promise<string>` | undefined |  |
 | onCustomImageUpload | custom image upload here, needs return Promise | `() => Promise` | See detail in src/editor/index.jsx |  |
 
 ## renderHTML
@@ -63,13 +63,11 @@ Called on image upload
 
 ```js
 // This function can convert File object to a datauri string
-function onImageUpload(file) {
+function onImageUpload(file, imageText, items) {
   return new Promise(resolve => {
     const reader = new FileReader();
     reader.onload = data => {
-      resolve(data.target.result);
-      // or adjust pre insert imageText by paste object array: items
-      // resolve((imageText, items) => imageText);
+      resolve(imageText.replace('{url}', data.target.result));
     };
     reader.readAsDataURL(file);
   });

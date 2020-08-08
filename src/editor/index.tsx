@@ -4,11 +4,11 @@ import NavigationBar from 'src/components/NavigationBar';
 import ToolBar from 'src/components/ToolBar';
 import i18n from 'src/i18n';
 import emitter from 'src/share/emitter';
-import { EditorConfig, EditorEvent, initialSelection, KeyboardEventListener, Selection } from 'src/share/var';
+import { EditorConfig, EditorEvent, initialSelection, KeyboardEventListener, Selection, itemInfo } from 'src/share/var';
 import getDecorated from 'src/utils/decorate';
 import mergeConfig from 'src/utils/mergeConfig';
 import { isKeyMatch, isPromise } from 'src/utils/tool';
-import getUploadPlaceholder, { itemInfo } from 'src/utils/uploadPlaceholder';
+import getUploadPlaceholder from 'src/utils/uploadPlaceholder';
 import defaultConfig from './defaultConfig';
 import './index.less';
 import { HtmlRender, HtmlType } from './preview';
@@ -665,27 +665,29 @@ class Editor extends React.Component<EditorProps, EditorState> {
     if (!onImageUpload) {
       return;
     }
-    const itemsInfo: Array<Promise<itemInfo>> = [];
+    const itemsInfo: Promise<itemInfo>[] = [];
     Array.prototype.forEach.call(items, (it: DataTransferItem) => {
       if (it.kind === 'file' && it.type.includes('image')) {
         const file = it.getAsFile();
         if (file) {
-          itemsInfo.push(Promise.resolve({
-            kind: it.kind,
-            type: it.type,
-            content: file,
-          }));
+          itemsInfo.push(
+            Promise.resolve({
+              kind: it.kind,
+              type: it.type,
+              content: file,
+            }),
+          );
         }
       } else if (it.kind === 'string' && it.type === 'text/plain') {
         const temp = { kind: it.kind, type: it.type };
         itemsInfo.push(new Promise(resolve => it.getAsString(data => resolve({ ...temp, content: data }))));
       }
     });
-    Promise.all(itemsInfo).then(res => {
-      const queue: Array<Promise<string>> = [];
-      Array.prototype.forEach.call(res, (it: { kind: string, type: string, content: any }) => {
+    Promise.all(itemsInfo).then(item => {
+      const queue: Promise<string>[] = [];
+      Array.prototype.forEach.call(item, (it: { kind: string; type: string; content: any }) => {
         if (it.kind === 'file') {
-          const placeholder = getUploadPlaceholder(it.content, onImageUpload, res);
+          const placeholder = getUploadPlaceholder(it.content, onImageUpload, item);
           queue.push(Promise.resolve(placeholder.placeholder));
           placeholder.uploaded.then(str => {
             const text = this.getMdValue().replace(placeholder.placeholder, str);

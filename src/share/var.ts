@@ -1,6 +1,12 @@
 import * as React from 'react';
 
-export type UploadFunc = ((file: File) => Promise<string>) | ((file: File, callback: (url: string) => void) => void);
+export type UploadFunc = (file: File, imageText: string, itemsInfo: itemInfo[]) => Promise<string>;
+
+export type itemInfo = {
+  kind: string;
+  type: string;
+  content: any;
+};
 
 export type EditorEvent = 'change' | 'fullscreen' | 'viewchange' | 'keydown' | 'focus' | 'blur' | 'scroll';
 

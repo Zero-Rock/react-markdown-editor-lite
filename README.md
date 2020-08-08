@@ -9,8 +9,7 @@ react-markdown-editor-lite
 [中文说明](README_CN.md)
 
 ## Differences with origin
-* change onImageUpload return, you can adjust image text before insert
-* remove text in paste items, prevent Chrome paste file name
+* change onImageUpload parameters
 
 * A light-weight(20KB zipped) Markdown editor of React component
 * Supports TypeScript
@@ -72,7 +71,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 // Finish!
-function handleEditorChange({html, text}) {    
+function handleEditorChange({html, text}) {
   console.log('handleEditorChange', html, text)
 }
 export default (props) => {
@@ -118,7 +117,7 @@ export default function() {
 ```
 
 ## Import in Browser
-Since 1.1.0, You can add `script` and `link` tags in your browser and use the global variable `ReactMarkdownEditorLite`. 
+Since 1.1.0, You can add `script` and `link` tags in your browser and use the global variable `ReactMarkdownEditorLite`.
 
 You can download these files directly from [![cdnjs][cdnjs-image]][cdnjs-url] [![jsdelivr][jsdelivr-image]][jsdelivr-url] [![unpkg][unpkg-image]][unpkg-url]
 

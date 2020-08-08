@@ -9,8 +9,7 @@ react-markdown-editor-lite
 [English Docs](README.md)
 
 ## 和原版区别
-* 调整了onImageUpload方法返回，可以传Function来调整待插入的图片链接
-* 粘贴图片时默认移除了文字，避免在Chrome下会粘贴多余的文件名
+* 调整了onImageUpload方法参数
 
 * A light-weight(20KB zipped) Markdown editor of React component
 * Supports TypeScript
@@ -72,7 +71,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 // 完成！
-function handleEditorChange({html, text}) {    
+function handleEditorChange({html, text}) {
   console.log('handleEditorChange', html, text)
 }
 export default (props) => {
@@ -108,7 +107,7 @@ const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
 });
 
 export default function() {
-  return (      
+  return (
     <MdEditor
       style={{ height: "500px" }}
       renderHTML={/* Render function */}

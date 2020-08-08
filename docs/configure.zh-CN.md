@@ -22,7 +22,7 @@
 | config.syncScrollMode | 同步滚动预览区域与编辑区域 | Array | `['rightFollowLeft', 'leftFollowRight']` | |
 | config.imageAccept | 接受上传的图片类型，例如`.jpg,.png` | String | `''` | |
 | onChange | 编辑器内容改变时回调 | Function | `({text, html}, event) => {}` |  |
-| onImageUpload | 上传图片时调用，需要返回一个Promise，完成时返回图片地址，或传一个function | `(file: File) => Promise<string | Function>;` | undefined |  |
+| onImageUpload | 上传图片时调用，需要返回一个Promise，完成时返回插入的图片文本 | `(file: File, imageText: string, itemsInfo: itemInfo[]) => Promise<string>;` | undefined |  |
 | onCustomImageUpload | 自定义图片按钮点击事件，返回一个Promise，完成时返回图片地址。若定义了此函数，则onImageUpload不起作用 | `() => Promise<string>` | undefined |  |
 
 ## renderHTML
@@ -60,13 +60,11 @@ export default (props) => {
 
 ```js
 // 这个函数可以把File转为datauri字符串，作为演示
-function onImageUpload(file) {
+function onImageUpload(file, imageText, items) {
   return new Promise(resolve => {
     const reader = new FileReader();
     reader.onload = data => {
-      resolve(data.target.result);
-      // 或者通过粘贴时的对象数组items，来调整插入的imageText
-      // resolve((imageText, items) => imageText);
+      resolve(imageText.replace('{url}', data.target.result));
     };
     reader.readAsDataURL(file);
   });
