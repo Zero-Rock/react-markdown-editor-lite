@@ -8,7 +8,7 @@ import { EditorConfig, EditorEvent, initialSelection, KeyboardEventListener, Sel
 import getDecorated from 'src/utils/decorate';
 import mergeConfig from 'src/utils/mergeConfig';
 import { isKeyMatch, isPromise } from 'src/utils/tool';
-import getUploadPlaceholder from 'src/utils/uploadPlaceholder';
+import getUploadPlaceholder, { itemInfo } from 'src/utils/uploadPlaceholder';
 import defaultConfig from './defaultConfig';
 import './index.less';
 import { HtmlRender, HtmlType } from './preview';
@@ -665,12 +665,27 @@ class Editor extends React.Component<EditorProps, EditorState> {
     if (!onImageUpload) {
       return;
     }
-    const queue: Promise<string>[] = [];
+    const itemsInfo: Array<Promise<itemInfo>> = [];
     Array.prototype.forEach.call(items, (it: DataTransferItem) => {
       if (it.kind === 'file' && it.type.includes('image')) {
         const file = it.getAsFile();
         if (file) {
-          const placeholder = getUploadPlaceholder(file, onImageUpload);
+          itemsInfo.push(Promise.resolve({
+            kind: it.kind,
+            type: it.type,
+            content: file,
+          }));
+        }
+      } else if (it.kind === 'string' && it.type === 'text/plain') {
+        const temp = { kind: it.kind, type: it.type };
+        itemsInfo.push(new Promise(resolve => it.getAsString(data => resolve({ ...temp, content: data }))));
+      }
+    });
+    Promise.all(itemsInfo).then(res => {
+      const queue: Array<Promise<string>> = [];
+      Array.prototype.forEach.call(res, (it: { kind: string, type: string, content: any }) => {
+        if (it.kind === 'file') {
+          const placeholder = getUploadPlaceholder(it.content, onImageUpload, res);
           queue.push(Promise.resolve(placeholder.placeholder));
           placeholder.uploaded.then(str => {
             const text = this.getMdValue().replace(placeholder.placeholder, str);
@@ -682,17 +697,18 @@ class Editor extends React.Component<EditorProps, EditorState> {
               end: selection.start + offset,
             });
           });
+        } else if (it.kind === 'string' && it.type === 'text/plain') {
+          // prevent Chrome paste image name
+          // queue.push(it.content);
         }
-      } else if (it.kind === 'string' && it.type === 'text/plain') {
-        queue.push(new Promise(resolve => it.getAsString(resolve)));
-      }
-    });
-    Promise.all(queue).then(res => {
-      const text = res.join('');
-      const selection = this.getSelection();
-      this.insertText(text, true, {
-        start: selection.start === selection.end ? text.length : 0,
-        end: text.length,
+      });
+      Promise.all(queue).then(res => {
+        const text = res.join('');
+        const selection = this.getSelection();
+        this.insertText(text, true, {
+          start: selection.start === selection.end ? text.length : 0,
+          end: text.length,
+        });
       });
     });
   }
