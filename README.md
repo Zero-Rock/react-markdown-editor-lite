@@ -27,6 +27,7 @@ react-markdown-editor-lite
 * 界面可配置, 如只显示编辑区或预览区
 * 支持图片上传或拖拽
 * 支持编辑区和预览区同步滚动
+* 支持额外的左侧、右侧节点
 
 ## Demo
 Online demo <br>[https://harrychen0506.github.io/react-markdown-editor-lite/](https://harrychen0506.github.io/react-markdown-editor-lite/)

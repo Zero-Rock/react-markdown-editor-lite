@@ -17,6 +17,8 @@ type Plugin = { comp: any; config: any };
 
 interface EditorProps extends EditorConfig {
   id?: string;
+  extraLeft?: React.ReactElement[];
+  extraRight?: React.ReactElement[];
   defaultValue?: string;
   value?: string;
   renderHTML: (text: string) => HtmlType | Promise<HtmlType> | (() => HtmlType);
@@ -720,7 +722,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
     const { view, fullScreen } = this.state;
     const getPluginAt = (at: string) => this.state.plugins[at] || [];
     const isShowMenu = !!view.menu;
-    const { id } = this.props;
+    const { id, extraLeft, extraRight } = this.props;
     const editorId = id ? `${id}_md` : undefined;
     const previewerId = id ? `${id}_html` : undefined;
     return (
@@ -731,7 +733,13 @@ class Editor extends React.Component<EditorProps, EditorState> {
         onKeyDown={this.handleKeyDown}
         onDrop={this.handleDrop}
       >
-        <NavigationBar visible={isShowMenu} left={getPluginAt('left')} right={getPluginAt('right')} />
+        <NavigationBar
+          visible={isShowMenu}
+          left={getPluginAt('left')}
+          extraLeft={extraLeft}
+          right={getPluginAt('right')}
+          extraRight={extraRight}
+        />
         <div className="editor-container">
           {showHideMenu && (
             <ToolBar>

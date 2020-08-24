@@ -4,6 +4,8 @@ import './index.less';
 interface NavigationBarProps {
   left?: React.ReactElement[];
   right?: React.ReactElement[];
+  extraLeft?: React.ReactElement[];
+  extraRight?: React.ReactElement[];
   visible: boolean;
 }
 
@@ -11,10 +13,16 @@ export default function NavigationBar(props: NavigationBarProps) {
   return (
     <div className={`rc-md-navigation ${props.visible ? 'visible' : 'in-visible'}`}>
       <div className="navigation-nav left">
-        <div className="button-wrap">{props.left}</div>
+        <div className="button-wrap">
+          {props.left}
+          {props.extraLeft}
+        </div>
       </div>
       <div className="navigation-nav right">
-        <div className="button-wrap">{props.right}</div>
+        <div className="button-wrap">
+          {props.right}
+          {props.extraRight}
+        </div>
       </div>
     </div>
   );
