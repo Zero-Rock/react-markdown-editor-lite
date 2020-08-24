@@ -15,7 +15,7 @@ import { HtmlRender, HtmlType } from './preview';
 
 type Plugin = { comp: any; config: any };
 
-interface EditorProps extends EditorConfig {
+export interface EditorProps extends EditorConfig {
   id?: string;
   extraLeft?: React.ReactElement[];
   extraRight?: React.ReactElement[];
