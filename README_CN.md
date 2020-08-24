@@ -13,6 +13,7 @@ react-markdown-editor-lite
 * 支持额外的工具条左侧、右侧节点
 * 分离html渲染样式，可自行引入
 * 移除IE9的icon样式支持，减少样式文件大小
+---
 
 * A light-weight(20KB zipped) Markdown editor of React component
 * Supports TypeScript
