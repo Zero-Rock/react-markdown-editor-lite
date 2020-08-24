@@ -4,8 +4,8 @@ import './index.less';
 interface NavigationBarProps {
   left?: React.ReactElement[];
   right?: React.ReactElement[];
-  extraLeft?: React.ReactElement[];
-  extraRight?: React.ReactElement[];
+  extraLeft?: React.ReactElement | React.ReactElement[];
+  extraRight?: React.ReactElement | React.ReactElement[];
   visible: boolean;
 }
 
