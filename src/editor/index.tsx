@@ -17,8 +17,8 @@ type Plugin = { comp: any; config: any };
 
 export interface EditorProps extends EditorConfig {
   id?: string;
-  extraLeft?: React.ReactElement[];
-  extraRight?: React.ReactElement[];
+  extraLeft?: React.ReactElement | React.ReactElement[];
+  extraRight?: React.ReactElement | React.ReactElement[];
   defaultValue?: string;
   value?: string;
   renderHTML: (text: string) => HtmlType | Promise<HtmlType> | (() => HtmlType);

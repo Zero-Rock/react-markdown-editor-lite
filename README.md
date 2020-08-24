@@ -10,6 +10,9 @@ react-markdown-editor-lite
 
 ## Differences with origin
 * change onImageUpload parameters
+* support for additional left and right nodes of the toolbar
+* separate html rendering styles, which can be imported by yourself
+* remove IE9 icon style support, reduce style file size
 
 * A light-weight(20KB zipped) Markdown editor of React component
 * Supports TypeScript
@@ -27,7 +30,6 @@ react-markdown-editor-lite
 * 界面可配置, 如只显示编辑区或预览区
 * 支持图片上传或拖拽
 * 支持编辑区和预览区同步滚动
-* 支持额外的左侧、右侧节点
 
 ## Demo
 Online demo <br>[https://harrychen0506.github.io/react-markdown-editor-lite/](https://harrychen0506.github.io/react-markdown-editor-lite/)
@@ -64,6 +66,8 @@ import MarkdownIt from 'markdown-it'
 import MdEditor from 'react-markdown-editor-lite'
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
+// import html rendering style
+import 'react-markdown-editor-lite/lib/html.css';
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);

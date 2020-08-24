@@ -99,6 +99,7 @@ module.exports = config => {
               fs.unlinkSync(it);
               tryRemoveDir(it.substr(0, it.lastIndexOf('/')));
             });
+            fs.copyFileSync('./src/editor/html.css', './lib/html.css');
             // 改名回来
             fs.renameSync('./lib/temp_dts.tmp', './lib/index.d.ts');
             // 移除掉文件中的less引用
