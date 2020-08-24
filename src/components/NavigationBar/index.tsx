@@ -20,8 +20,8 @@ export default function NavigationBar(props: NavigationBarProps) {
       </div>
       <div className="navigation-nav right">
         <div className="button-wrap">
-          {props.right}
           {props.extraRight}
+          {props.right}
         </div>
       </div>
     </div>
