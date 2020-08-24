@@ -1,6 +1,6 @@
 {
   "name": "@terminus/react-markdown-editor-lite",
-  "version": "1.2.1",
+  "version": "1.2.4",
   "description": "a light-weight Markdown editor based on React",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -21,6 +21,7 @@
     "prod": "nowa2 build -o",
     "test": "mocha",
     "coverage": "nyc mocha",
+    "prepublish": "npm run prod",
     "precommit": "lint-staged"
   },
   "repository": {
