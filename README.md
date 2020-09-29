@@ -1,8 +1,6 @@
 react-markdown-editor-lite
 ========
 
-[![NPM package][npm-version-image]][npm-url]
-[![NPM downloads][npm-downloads-image]][npm-url]
 [![MIT License][license-image]][license-url]
 [![Workflow][workflow-image]][workflow-url]
 
@@ -15,6 +13,7 @@ react-markdown-editor-lite
 * remove IE9 icon style support, reduce style file size
 ---
 
+## Feature
 * A light-weight(20KB zipped) Markdown editor of React component
 * Supports TypeScript
 * Supports custom markdown parser
@@ -23,14 +22,6 @@ react-markdown-editor-lite
 * Full control over UI
 * Supports image uploading and dragging
 * Supports synced scrolling between editor and preview
-* 一款轻量的基于React的Markdown编辑器, 压缩后代码只有20KB
-* 支持TypeScript
-* 支持自定义Markdown解析器
-* 支持常用的Markdown编辑功能，如加粗，斜体等等...
-* 支持插件化的功能键
-* 界面可配置, 如只显示编辑区或预览区
-* 支持图片上传或拖拽
-* 支持编辑区和预览区同步滚动
 
 ## Demo
 Online demo <br>[https://harrychen0506.github.io/react-markdown-editor-lite/](https://harrychen0506.github.io/react-markdown-editor-lite/)

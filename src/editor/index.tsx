@@ -702,8 +702,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
             });
           });
         } else if (it.kind === 'string' && it.type === 'text/plain') {
-          // prevent Chrome paste image name
-          // queue.push(it.content);
+          queue.push(it.content);
         }
       });
       Promise.all(queue).then(res => {
