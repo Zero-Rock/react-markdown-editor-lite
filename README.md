@@ -11,6 +11,7 @@ react-markdown-editor-lite
 * support for additional left and right nodes of the toolbar
 * separate html rendering styles, which can be imported by yourself
 * remove IE9 icon style support, reduce style file size
+* use text instead of icon for toggle mode
 ---
 
 ## Feature

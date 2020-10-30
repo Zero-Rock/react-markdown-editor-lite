@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'rmel-iconfont';
-  src: url('iconfont.ttf?t=1582613725792') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  src: url('iconfont.ttf?t=1582613725792') format('truetype');
+  /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
 }
 
 .rmel-iconfont {
@@ -11,9 +12,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.rmel-icon-keyboard:before {
+/* .rmel-icon-keyboard:before {
   content: '\ed80';
-}
+} */
 
 .rmel-icon-delete:before {
   content: '\ed3c';
@@ -27,13 +28,13 @@
   content: '\ed3b';
 }
 
-.rmel-icon-visibility:before {
+/* .rmel-icon-visibility:before {
   content: '\ed44';
 }
 
 .rmel-icon-view-split:before {
   content: '\ed45';
-}
+} */
 
 .rmel-icon-link:before {
   content: '\ed5f';

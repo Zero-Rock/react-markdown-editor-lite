@@ -1,5 +1,8 @@
 export default {
   clearTip: '您确定要清空所有内容吗？',
+  edit: '编辑',
+  preview: '预览',
+  editAndPreview: '同步预览',
   btnHeader: '标题',
   btnClear: '清空',
   btnBold: '加粗',

@@ -95,18 +95,21 @@ export default class ModeToggle extends PluginComponent<ModeToggleState> {
     switch (next) {
       case NEXT_ACTION.SHOW_ALL:
         return {
-          icon: 'view-split',
+          // icon: 'view-split',
           title: 'All',
+          text: 'editAndPreview',
         };
       case NEXT_ACTION.SHOW_HTML:
         return {
-          icon: 'visibility',
+          // icon: 'visibility',
           title: 'Preview',
+          text: 'preview',
         };
       default:
         return {
-          icon: 'keyboard',
+          // icon: 'keyboard',
           title: 'Editor',
+          text: 'edit',
         };
     }
   }
@@ -120,7 +123,7 @@ export default class ModeToggle extends PluginComponent<ModeToggleState> {
           title={i18n.get('btnMode' + display.title)}
           onClick={this.handleClick}
         >
-          <Icon type={display.icon} />
+          {i18n.get(display.text)}
         </span>
       );
     } else {
