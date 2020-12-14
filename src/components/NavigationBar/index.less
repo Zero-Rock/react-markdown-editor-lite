@@ -43,20 +43,16 @@
         color: #bdbdbd; // grey lighten-1
         cursor: not-allowed;
       }
-      &::after {
-        content: '';
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 2px;
-        top: 2px;
-        background: #757575;
-      }
-      &.active {
-        &::after {
-          background: transparent;
-        }
-      }
+    }
+
+    .active-button::after {
+      content: '';
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 2px;
+      top: 2px;
+      background: #757575;
     }
 
     .rmel-iconfont {
