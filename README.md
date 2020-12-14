@@ -12,6 +12,7 @@ react-markdown-editor-lite
 * separate html rendering styles, which can be imported by yourself
 * remove IE9 icon style support, reduce style file size
 * use text instead of icon for toggle mode
+* change mode toggle button to left, other buttons to right, and remove show_all mode
 ---
 
 ## Feature

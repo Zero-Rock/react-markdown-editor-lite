@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Icon from 'src/components/Icon';
 import i18n from 'src/i18n';
 import { PluginComponent } from './Plugin';
 
@@ -10,38 +9,15 @@ interface ModeToggleState {
   };
 }
 
-enum NEXT_ACTION {
-  SHOW_ALL,
-  SHOW_MD,
-  SHOW_HTML,
-}
-
 export default class ModeToggle extends PluginComponent<ModeToggleState> {
   static pluginName = 'mode-toggle';
-  static align = 'right';
+  static align = 'left';
 
   private get isDisplay() {
     if (this.editorConfig.canView) {
       return this.editorConfig.canView.html && this.editorConfig.canView.md;
     }
     return false;
-  }
-
-  /**
-   * 显示标准：
-   * 两个都显示的时候，点击显示MD，隐藏HTML
-   * 只显示HTML的时候，点击全部显示
-   * 只显示MD的时候，点击显示HTML，隐藏MD
-   */
-  private get next(): NEXT_ACTION {
-    const { view } = this.state;
-    if (view.html && view.md) {
-      return NEXT_ACTION.SHOW_MD;
-    } else if (!this.state.view.html) {
-      return NEXT_ACTION.SHOW_HTML;
-    } else {
-      return NEXT_ACTION.SHOW_ALL;
-    }
   }
 
   constructor(props: any) {
@@ -55,27 +31,20 @@ export default class ModeToggle extends PluginComponent<ModeToggleState> {
     };
   }
 
-  private handleClick() {
-    switch (this.next) {
-      case NEXT_ACTION.SHOW_ALL:
-        this.editor.setView({
-          html: true,
-          md: true,
-        });
+  private handleClick(key: 'edit' | 'preview') {
+    let { html, md } = this.state.view;
+    switch (key) {
+      case 'edit':
+        md = html ? !md : true; // 必须有一个为 true
         break;
-      case NEXT_ACTION.SHOW_HTML:
-        this.editor.setView({
-          html: true,
-          md: false,
-        });
-        break;
-      case NEXT_ACTION.SHOW_MD:
-        this.editor.setView({
-          html: false,
-          md: true,
-        });
+      case 'preview':
+        html = md ? !html : true;
         break;
     }
+    const nextView = { html, md };
+
+    this.setState({ view: nextView });
+    this.editor.setView(nextView);
   }
 
   private handleChange(view: { html: boolean; md: boolean }) {
@@ -90,40 +59,25 @@ export default class ModeToggle extends PluginComponent<ModeToggleState> {
     this.editor.off('viewchange', this.handleChange);
   }
 
-  getDisplayInfo() {
-    const next = this.next;
-    switch (next) {
-      case NEXT_ACTION.SHOW_ALL:
-        return {
-          // icon: 'view-split',
-          title: 'All',
-          text: 'editAndPreview',
-        };
-      case NEXT_ACTION.SHOW_HTML:
-        return {
-          // icon: 'visibility',
-          title: 'Preview',
-          text: 'preview',
-        };
-      default:
-        return {
-          // icon: 'keyboard',
-          title: 'Editor',
-          text: 'edit',
-        };
-    }
-  }
-
   render() {
     if (this.isDisplay) {
-      const display = this.getDisplayInfo();
+      const { html, md } = this.state.view;
       return (
-        <span
-          className="button button-type-mode"
-          title={i18n.get('btnMode' + display.title)}
-          onClick={this.handleClick}
-        >
-          {i18n.get(display.text)}
+        <span>
+          <span
+            className={`button button-type-mode ${md ? 'active' : ''}`}
+            title={i18n.get('btnModeEditor')}
+            onClick={() => this.handleClick('edit')}
+          >
+            {i18n.get('edit')}
+          </span>
+          <span
+            className={`button button-type-mode ${html ? 'active' : ''}`}
+            title={i18n.get('btnModePreview')}
+            onClick={() => this.handleClick('preview')}
+          >
+            {i18n.get('preview')}
+          </span>
         </span>
       );
     } else {

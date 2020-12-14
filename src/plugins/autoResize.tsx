@@ -3,7 +3,7 @@ import { PluginComponent } from './Plugin';
 
 export default class AutoResize extends PluginComponent {
   static pluginName = 'auto-resize';
-  static align = 'left';
+  static align = 'right';
   static defaultConfig = {
     min: 200,
     max: Infinity,
