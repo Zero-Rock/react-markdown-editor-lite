@@ -11,7 +11,7 @@
     "README.md"
   ],
   "directories": {
-    "example": "example",
+    "doc": "docs",
     "lib": "lib",
     "test": "test"
   },
@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Erda-FE/react-markdown-editor-lite"
+    "url": "git+https://github.com/Erda-FE/react-markdown-editor-lite.git"
   },
   "keywords": [
     "markdown",
