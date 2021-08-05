@@ -131,6 +131,7 @@ class Demo extends React.Component<any, any> {
                 html: true,
                 fullScreen: true,
                 hideMenu: true,
+                mdWithHtml: false,
               },
               table: {
                 maxRow: 5,
@@ -158,8 +159,8 @@ class Demo extends React.Component<any, any> {
               },
               imageUrl: 'https://octodex.github.com/images/minion.png'
             }}
-            onChange={this.handleEditorChange} 
-          />  
+            onChange={this.handleEditorChange}
+          />
         </div> */}
       </div>
     );

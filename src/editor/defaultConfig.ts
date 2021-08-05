@@ -13,6 +13,7 @@ const defaultConfig: EditorConfig = {
     html: true,
     fullScreen: true,
     hideMenu: true,
+    mdWithHtml: false,
   },
   htmlClass: '',
   markdownClass: '',

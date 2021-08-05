@@ -33,13 +33,18 @@ export default class ModeToggle extends PluginComponent<ModeToggleState> {
 
   private handleClick(key: 'edit' | 'preview') {
     let { html, md } = this.state.view;
-    switch (key) {
-      case 'edit':
-        md = html ? !md : true; // 必须有一个为 true
-        break;
-      case 'preview':
-        html = md ? !html : true;
-        break;
+    if (this.editorConfig.canView?.mdWithHtml) {
+      switch (key) {
+        case 'edit':
+          md = html ? !md : true; // 必须有一个为 true
+          break;
+        case 'preview':
+          html = md ? !html : true;
+          break;
+      }
+    } else {
+      html = key === 'preview';
+      md = key === 'edit';
     }
     const nextView = { html, md };
 

@@ -24,6 +24,7 @@ export interface EditorConfig {
     html: boolean;
     fullScreen: boolean;
     hideMenu: boolean;
+    mdWithHtml: boolean;
   };
   htmlClass?: string;
   markdownClass?: string;
