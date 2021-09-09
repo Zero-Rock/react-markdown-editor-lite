@@ -58,7 +58,6 @@ interface EditorState {
 
 class Editor extends React.Component<EditorProps, EditorState> {
   private static plugins: Plugin[] = [];
-  composing: boolean;
   /**
    * Register plugin
    * @param {any} comp Plugin component
@@ -128,8 +127,6 @@ class Editor extends React.Component<EditorProps, EditorState> {
     if (this.config.canView && !this.config.canView.menu) {
       this.state.view.menu = false;
     }
-
-    this.composing = false;
 
     this.nodeMdText = React.createRef();
     this.nodeMdPreviewWraper = React.createRef();
@@ -719,17 +716,6 @@ class Editor extends React.Component<EditorProps, EditorState> {
     });
   }
 
-  private onCompositionStart = () => {
-    this.composing = true;
-  };
-
-  private onCompositionEnd = (e: React.CompositionEvent<HTMLTextAreaElement>) => {
-    if (!this.composing) return;
-    this.composing = false;
-    // 触发内部事件
-    this.setText(this.state.text + e.data);
-  };
-
   render() {
     const showHideMenu = this.config.canView && (this.config.canView.hideMenu || !this.config.canView.menu);
     const { view, fullScreen } = this.state;
@@ -776,8 +762,6 @@ class Editor extends React.Component<EditorProps, EditorState> {
               className={`section-container input ${this.config.markdownClass || ''}`}
               wrap="hard"
               onChange={this.handleChange}
-              onCompositionStart={this.onCompositionStart}
-              onCompositionEnd={this.onCompositionEnd}
               onScroll={this.handleInputScroll}
               onMouseOver={() => (this.shouldSyncScroll = 'md')}
               onPaste={this.handlePaste}
