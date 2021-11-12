@@ -65,6 +65,7 @@ export default class AutoResize extends PluginComponent {
     this.editor.on('change', this.handleChange);
     this.editor.on('viewchange', this.handleChange);
     this.handleChange();
+    this.doResize();
   }
 
   componentWillUnmount() {

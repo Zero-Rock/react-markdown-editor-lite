@@ -15,7 +15,6 @@ import Image from './plugins/Image';
 import Link from './plugins/link';
 import ListOrdered from './plugins/list/ordered';
 import ListUnordered from './plugins/list/unordered';
-import Logger from './plugins/logger';
 import ModeToggle from './plugins/modeToggle';
 import Table from './plugins/table';
 
@@ -35,7 +34,6 @@ Editor.use(Table);
 Editor.use(Image);
 Editor.use(Link);
 // Editor.use(Clear);
-Editor.use(Logger);
 Editor.use(ModeToggle);
 Editor.use(FullScreen);
 
@@ -62,7 +60,6 @@ export const Plugins = {
   Image,
   Link,
   Clear,
-  Logger,
   ModeToggle,
   FullScreen,
   AutoResize,
