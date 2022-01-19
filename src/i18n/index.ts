@@ -6,8 +6,8 @@ type LangItem = { [x: string]: string };
 type Langs = { [x: string]: LangItem };
 
 class I18n {
-  private langs: Langs = { enUS, zhCN };
-  private current: string = 'enUS';
+  private langs: Langs = { en: enUS, zh: zhCN };
+  private current: string = 'zh';
 
   constructor() {
     this.setUp();
@@ -18,26 +18,10 @@ class I18n {
       // 不在浏览器环境中，取消检测
       return;
     }
-    let locale = 'enUS';
-    // 检测语言
-    if (navigator.language) {
-      const it = navigator.language.split('-');
-      locale = it[0];
-      if (it.length !== 1) {
-        locale += it[it.length - 1].toUpperCase();
-      }
-    }
-
-    // IE10及更低版本使用browserLanguage
     // @ts-ignore
-    if (navigator.browserLanguage) {
-      // @ts-ignore
-      const it = navigator.browserLanguage.split('-');
-      locale = it[0];
-      if (it[1]) {
-        locale += it[1].toUpperCase();
-      }
-    }
+    let userLanguage = window.navigator.userLanguage || window.navigator.language;
+    userLanguage = userLanguage === 'zh-CN' ? 'zh' : 'en';
+    const locale = window.localStorage.getItem('locale') || userLanguage;
 
     if (this.current !== locale && this.isAvaliable(locale)) {
       this.current = locale;
